@@ -1,0 +1,32 @@
+{% extends "pairs_list.html" %}
+
+{% block table %}
+   <table border="1" class="table table-bordered">
+        <tr>
+            <th class="span1">Пара</th>
+            <th class="span1">Подгруппа</th>
+            <th class="span2">Дисциплина</th>
+            <th class="span1">&nbsp;</th>
+            <th class="span1">Аудитория</th>
+            <th colspan="3">Преподаватель</th>
+        </tr>
+        {% for day in days %}
+
+            <tr>
+                <th colspan="8">{{ day.0 }} ({{ day.2 }})</th>
+            </tr>
+
+            {% for pair in day.1 %}
+                <tr>
+                    <td>{{ pair.pair_numbers }}</td>
+                    <td>{{ pair.subgroup.name }}</td>
+                    <td>{{ pair.subject }}</td>
+                    <td>{{ pair.pair_type }}</td>
+                    <td>{{ pair.aud.name }}</td>
+                    <td class="span2"><a href="/prep/{{ pair.prep_id }}">{{ pair.prep.name }}</a></td>
+                    <td class="span1">{{ pair.prep.dol }}</td>
+                    <td class="span1">{{ pair.prep.caf }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>{% endblock %}

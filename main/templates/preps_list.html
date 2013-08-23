@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ul class="nav nav-list">
+    {% for prep in preps %}
+        <li><a href="/prep/{{ prep.id }}">{{ prep.name }}</a>
+    {% endfor %}
+    </ul>
+{% endblock %}

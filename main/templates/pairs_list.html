@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title2 %}{% block title1 %}{{ title }}{% endblock %} {% endblock %}
+
+{% block content %}
+
+    <p>Выбрана неделя: <b>{{ cur_week.num }}</b></p>
+    <div class="pagination">
+        <ul>
+            {% for week in weeks %}
+                <li class="{% if week.id == cur_week.id %}disabled{% else %}enabled{% endif %}">
+                <a href="/{{ req }}/{{ id }}/{{ week.id }}">{{ week.num }}</a>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% block table %}
+
+{% endblock %}
+
+{% endblock %}

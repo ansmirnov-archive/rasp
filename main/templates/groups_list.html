@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ul class="nav nav-list">
+    {% for group in groups %}
+        <li><a href="/group/{{ group.id }}">{{ group.name }}</a>
+    {% endfor %}
+    </ul>
+{% endblock %}

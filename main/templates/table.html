@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+{% for apairs in preps %}
+    {{ apairs.0 }}
+    {% with apairs.1 as pairs %}
+        <table style="border-collapse: collapse" border=1>
+            <tr>
+                <th width="10"></th>
+                {% for pair in  pairs.0.1 %}
+                    <th width="80">Пн</th>
+                    <th width="80">Вт</th>
+                    <th width="80">Ср</th>
+                    <th width="80">Чт</th>
+                    <th width="80">Пт</th>
+                    <th width="80">Сб</th>
+                {% endfor %}
+            </tr>
+            {% for pair in  pairs %}
+                <tr>
+                    <td>{{ pair.0 }}</td>
+                    {% for pp in pair.1 %}
+                        <td>{% for p in pp %}{% if p.day.name == 'Пн' %}{{ p.group.name }} {% endif %}{% endfor %}</td>
+                        <td>{% for p in pp %}{% if p.day.name == 'Вт' %}{{ p.group.name }} {% endif %}{% endfor %}</td>
+                        <td>{% for p in pp %}{% if p.day.name == 'Ср' %}{{ p.group.name }} {% endif %}{% endfor %}</td>
+                        <td>{% for p in pp %}{% if p.day.name == 'Чт' %}{{ p.group.name }} {% endif %}{% endfor %}</td>
+                        <td>{% for p in pp %}{% if p.day.name == 'Пт' %}{{ p.group.name }} {% endif %}{% endfor %}</td>
+                        <td>{% for p in pp %}{% if p.day.name == 'Сб' %}{{ p.group.name }} {% endif %}{% endfor %}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endwith %}
+{% endfor %}
+</body>
+</html>
