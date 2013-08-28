@@ -1,0 +1,14 @@
+uwsgi:
+    socket: /var/tmp/rasp_rgatausers_ru.sock
+    pythonpath: ### Path to project
+    env: DJANGO_SETTINGS_MODULE=rasp.settings
+    module: wsgi
+    daemonize: ### Path to logfile
+    max-requests: 5000
+    buffer-size: 32768
+    harakiri: 30
+    reload-mercy: 8
+    master: 1
+    no-orphans: 1
+    touch-reload: ### Path to touch file
+
