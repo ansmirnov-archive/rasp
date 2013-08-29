@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+<body>
+{% for group in groups %}
+    <p class="group_name">{{ group.0 }}</p>
+    <table border=1 class="stand" style="border-collapse: collapse">
+        <tr class="head">
+            <td>День</td>
+            <td>Пара</td>
+            <td>Недели</td>
+            <td>Подгр.</td>
+            <td>Вид</td>
+            <td>Дисциплина</td>
+            <td>Ауд.</td>
+            <td>Преподаватель</td>
+            <td>Долж.</td>
+            <td>Кафедра</td>
+        </tr>
+        {% for day in group.1 %}
+            {% for pair in day.1 %}
+                {%  if forloop.first %}
+                <tr class="first">
+                    <td rowspan="{{ day.2 }}">{{ day.0 }}</td>
+                {% else %}
+                <tr>
+                {% endif %}
+                    <td class="pair_number">{{ pair.pair_number }}</td>
+                    <td class="week">{{ pair.week }}</td>
+                    <td class="subgroup">{{ pair.subgroup }}</td>
+                    <td class="pair_type">{{ pair.pair_type }}</td>
+                    <td class="pair_subject">{{ pair.subject }}</td>
+                    <td class="aud">{{ pair.aud }}</td>
+                    <td class="prep_name">{{ pair.prep.name }}</td>
+                    <td class="prep_dol">{{ pair.prep.dol }}</td>
+                    <td class="prep_caf">{{ pair.prep.caf }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+{% endfor %}
+</body>
+</html>

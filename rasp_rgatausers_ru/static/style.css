@@ -12,10 +12,14 @@ table.stand {
     border-bottom-width: 3px;
     border-bottom-style: solid;
     border-color: black;
+    font-size: 13px;
 }
 
 .group_name {
     border-style: none;
+    margin-bottom: 2px;
+    text-align: center;
+    font-weight: bold;
 }
 
 table.stand tr.first {
