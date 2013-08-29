@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     #url(r'^$', 'rasp.views.home', name='home'),
     url(r'^table$', 'main.views.table', name='table'),
-    url(r'^import/$', 'main.views.import_csv_view', name='import'),
+    url(r'^stand$', 'main.views.stand', name='stand'),
     url(r'^$', 'main.views.groups_list', name='groups_list'),
     url(r'^preps$', 'main.views.preps_list', name='preps_list'),
     url(r'^(\w+)/(\d+)$', 'main.views.pairs_list', name='pairs_list'),

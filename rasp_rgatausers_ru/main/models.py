@@ -83,7 +83,7 @@ class Pair (models.Model):
     week = models.ManyToManyField(Week)
     pair_type = models.ForeignKey(PairType)
     subject = models.ForeignKey(Subject)
-    aud = models.ForeignKey(Aud)
+    aud = models.ForeignKey(Aud, blank=True, null=True)
     prep = models.ForeignKey(Prep, blank=True, null=True)
 
     def pair_numbers(self):
@@ -91,3 +91,15 @@ class Pair (models.Model):
 
     def __unicode__(self):
         return self.subject.name
+
+
+class StandPair (models.Model):
+    group = models.ForeignKey(Group, blank=True, null=True)
+    subgroup = models.CharField(max_length=100, blank=True, null=True)
+    day = models.ForeignKey(Day)
+    pair_number = models.CharField(max_length=100, blank=True, null=True)
+    week = models.CharField(max_length=100, blank=True, null=True)
+    pair_type = models.CharField(max_length=100, blank=True, null=True)
+    subject = models.CharField(max_length=100, blank=True, null=True)
+    aud = models.CharField(max_length=100, blank=True, null=True)
+    prep = models.ForeignKey(Prep, blank=True, null=True)

@@ -80,11 +80,32 @@ def parse_pairs(s, _b=1, _e=17):
         return [['']]
 
 
-def import_csv():
-    for row in csv.reader(open('main/base.csv', 'rt')):
+def import_csv(fn):
+    for row in csv.reader(open(fn, 'rt')):
         try:
             group = Group.objects.get_or_create(name=row[0])[0]
             day = Day.objects.get_or_create(name=row[1])[0]
+            dol = row[9]
+            caf = Caf.objects.get_or_create(name=row[10])[0]
+            if row[8] == '':
+                prep = None
+            else:
+                try:
+                    prep = Prep.objects.get(name=row[8])
+                except:
+                    prep = Prep(name=row[8], caf=caf, dol=dol)
+                    prep.save()
+            StandPair(
+                group=group,
+                day=day,
+                prep=prep,
+                subgroup=row[4],
+                pair_number=row[2],
+                week=row[3],
+                pair_type=row[5],
+                subject=row[6],
+                aud=row[7],
+            ).save()
             pair_numbers = [PairNumber.objects.get_or_create(num=x)[0] for x in parse_pairs(row[2], 0, 0)[0]]
             row[3].replace('Для', 'для')
             if row[3].find("для") != -1:
@@ -96,20 +117,17 @@ def import_csv():
             pair_type = PairType.objects.get_or_create(name=row[5])[0]
             subject = Subject.objects.get_or_create(name=row[6])[0]
             aud = Aud.objects.get_or_create(name=row[7])[0]
-            dol = row[9]
-            caf = Caf.objects.get_or_create(name=row[10])[0]
-            if row[8] == '':
-                prep = None
-            else:
-                try:
-                    prep = Prep.objects.get(name=row[8])
-                except:
-                    prep = Prep(name=row[8], caf=caf, dol=dol)
-                    prep.save()
             lst = map(None, weeks, subgroups)
             for item in lst:
-                pair = Pair(group=group, day=day, subgroup=item[1][0], pair_type=pair_type, subject=subject,
-                            aud=aud, prep=prep)
+                pair = Pair(
+                    group=group,
+                    day=day,
+                    subgroup=item[1][0],
+                    pair_type=pair_type,
+                    subject=subject,
+                    aud=aud,
+                    prep=prep,
+                )
                 pair.save()
                 weeks = item[0]
                 for week in weeks:
@@ -120,4 +138,4 @@ def import_csv():
             for r in row:
                 print r,
             print
-            #raise
+#            raise

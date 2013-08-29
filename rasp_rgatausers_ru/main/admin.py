@@ -12,5 +12,6 @@ admin.site.register(Aud)
 admin.site.register(Caf)
 admin.site.register(Prep)
 admin.site.register(Pair)
+admin.site.register(StandPair)
 
 

@@ -1,3 +1,79 @@
-.table th {
+table th {
     text-align: center;
+}
+
+table.stand {
+    border-top-width: 3px;
+    border-top-style: solid;
+    border-left-width: 3px;
+    border-left-style: solid;
+    border-right-width: 3px;
+    border-right-style: solid;
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    border-color: black;
+}
+
+.group_name {
+    border-style: none;
+}
+
+table.stand tr.first {
+    border-top-width: 3px;
+    border-top-style: solid;
+}
+
+table.stand td.prep_name {
+    width: 150px;
+}
+
+table.stand td.prep_caf {
+    width: 90px;
+    text-align: center;
+}
+
+table.stand td.prep_dol {
+    text-align: center;
+    width: 50px;
+}
+
+table.stand td.subgroup {
+    text-align: center;
+    width: 30px;
+}
+
+table.stand td.week {
+    width: 70px;
+    text-align: center;
+}
+
+table.stand td.pair_type {
+    width: 30px;
+    text-align: center;
+}
+
+table.stand td.aud {
+    width: 50px;
+    text-align: center;
+}
+
+table.stand td.pair_subject {
+    width: 300px;
+}
+
+table.stand td.pair_number {
+    width: 30px;
+    text-align: center;
+}
+
+table.stand tr.head {
+    font-size: 10px;
+    text-align: center;
+    background-color: #C0C0C0;
+    font-weight: bold;
+}
+
+table.stand td {
+    padding-top: 0px;
+    padding-bottom: 0px;
 }

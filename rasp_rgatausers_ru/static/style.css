@@ -1,3 +1,10 @@
-.table th {
+table th {
     text-align: center;
+}
+
+
+
+table.stand tr.first {
+    border-top-width: 3px;
+    border-top-style: solid;
 }

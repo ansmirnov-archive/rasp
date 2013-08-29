@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render_to_response
-import utils
 import models
 import datetime
-
-
-def import_csv_view(request):
-    utils.import_csv()
-    return render_to_response('blank.html', {})
 
 
 def groups_list(request):
@@ -81,6 +75,7 @@ def pairs_list(request, req, id, week_id=1):
         'weeks': models.Week.objects.all(),
     })
 
+
 def table(request):
     preps = []
     for prep in models.Prep.objects.all()[:3]:
@@ -90,3 +85,14 @@ def table(request):
             pairs.append((pair_number.num, [dpairs.filter(week__id=week.id) for week in models.Week.objects.all()[:3]]))
         preps.append((prep.name, pairs))
     return render_to_response('table.html', {'preps': preps})
+
+
+def stand(request):
+    groups = []
+    for group in models.Group.objects.all().order_by('name')[:10]:
+        pairs = []
+        for day in models.Day.objects.all():
+            d = list(group.standpair_set.filter(day=day).order_by('pair_number'))
+            pairs.append((day, d, len(d)))
+        groups.append((group.name, pairs))
+    return render_to_response('stand.html', {'groups': groups})
