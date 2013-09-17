@@ -5,6 +5,8 @@ from main.models import *
 
 import csv
 
+import sys
+import traceback
 
 def parse_pairs_fa(str):
     """
@@ -138,4 +140,4 @@ def import_csv(fn):
             for r in row:
                 print r,
             print
-#            raise
+            #raise
