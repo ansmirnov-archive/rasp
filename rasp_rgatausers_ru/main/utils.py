@@ -121,10 +121,14 @@ def import_csv(fn):
             aud = Aud.objects.get_or_create(name=row[7])[0]
             lst = map(None, weeks, subgroups)
             for item in lst:
+                try:
+                    subgroup = item[1][0]
+                except:
+                    subgroup = SubGroup.objects.get_or_create(name='', group=group)[0]
                 pair = Pair(
                     group=group,
                     day=day,
-                    subgroup=item[1][0],
+                    subgroup=subgroup,
                     pair_type=pair_type,
                     subject=subject,
                     aud=aud,
