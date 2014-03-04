@@ -4,12 +4,12 @@
 
 {% block content %}
     {% block def_button %} {% endblock %}
-    <p>Выбрана неделя: <b>{{ cur_week.num }}</b></p>
+    <p>Выбрана неделя: <b> {{ cur_week.id }}</b></p>
     <div class="pagination">
         <ul>
             {% for week in weeks %}
                 <li class="{% if week.id == cur_week.id %}disabled{% else %}enabled{% endif %}">
-                <a href="/{{ req }}/{{ id }}/{{ week.id }}">{{ week.num }}</a>
+                <a href="/{{ req }}/{{ id }}/{{ week.id }}">{{ week.id }}</a>
             {% endfor %}
         </ul>
     </div>
