@@ -31,7 +31,7 @@ def dcmp(x, y):
         return 0
 
 
-def pairs_list(request, req, id, week_id=1):
+def gen_pair_list(req, id, week_id=1):
     #TODO: генерация week
     def c_filter(pair_set, group=None, prep=None):
         if group is not None:
@@ -65,7 +65,7 @@ def pairs_list(request, req, id, week_id=1):
         if len(t[1]) > 0:
             days.append(t)
         c_date += datetime.timedelta(days=1)
-    return render_to_response('%s.html' % req, {
+    return {
         'title': title,
         'req': req,
         'id': id,
@@ -73,7 +73,12 @@ def pairs_list(request, req, id, week_id=1):
         'days': days,
         'cur_week': models.Week.objects.get(id=week_id),
         'weeks': models.Week.objects.all(),
-    })
+    }
+
+
+
+def pairs_list(request, req, id, week_id=1):
+    return render_to_response('%s.html' % req, gen_pair_list(req, id, week_id))
 
 
 def table(request):
