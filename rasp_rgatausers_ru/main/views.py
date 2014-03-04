@@ -87,7 +87,7 @@ def pair_date(date, pair_number):
     if min_pair == 0 or max_pair == 0:
         start = start.replace(hour=0, minute=0)
         end = start + datetime.timedelta(1)
-        return (start, end)
+        return (start-datetime.timedelta(hours=4), end-datetime.timedelta(hours=4))
     if min_pair == 1:
         start = start.replace(hour=8, minute=30)
     elif min_pair == 2:
@@ -103,13 +103,13 @@ def pair_date(date, pair_number):
     elif min_pair == 7:
         start = start.replace(hour=20, minute=30)
     end = start + datetime.timedelta(minutes=95*(max_pair-min_pair+1))
-    return (start, end)
+    return (start-datetime.timedelta(hours=4), end-datetime.timedelta(hours=4))
 
 
 def ical(request, req, id):
     plist = gen_pair_list(req, id, 1)
     days = plist['days']
-    for week in xrange(2, 3):
+    for week in xrange(2, 17):
         days.extend(gen_pair_list(req, id, week)['days'])
     res = []
     for day in days:
