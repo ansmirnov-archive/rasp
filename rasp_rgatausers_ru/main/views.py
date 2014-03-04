@@ -17,7 +17,7 @@ def preps_list(request):
     })
 
 
-start_semester = datetime.date(2013, 9, 2)
+start_semester = datetime.date(2014, 2, 10)
 
 
 def dcmp(x, y):
