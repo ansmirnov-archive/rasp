@@ -76,9 +76,54 @@ def gen_pair_list(req, id, week_id=1):
     }
 
 
-
 def pairs_list(request, req, id, week_id=1):
     return render_to_response('%s.html' % req, gen_pair_list(req, id, week_id))
+
+
+def pair_date(date, pair_number):
+    start = datetime.datetime(date.year, date.month, date.day)
+    min_pair = min([x.num for x in pair_number])
+    max_pair = max([x.num for x in pair_number])
+    if min_pair == 0 or max_pair == 0:
+        start = start.replace(hour=0, minute=0)
+        end = start + datetime.timedelta(1)
+        return (start, end)
+    if min_pair == 1:
+        start = start.replace(hour=8, minute=30)
+    elif min_pair == 2:
+        start = start.replace(hour=10, minute=15)
+    elif min_pair == 3:
+        start = start.replace(hour=12, minute=40)
+    elif min_pair == 4:
+        start = start.replace(hour=14, minute=25)
+    elif min_pair == 5:
+        start = start.replace(hour=16, minute=10)
+    elif min_pair == 6:
+        start = start.replace(hour=18, minute=00)
+    elif min_pair == 7:
+        start = start.replace(hour=20, minute=30)
+    end = start + datetime.timedelta(minutes=95*(max_pair-min_pair+1))
+    return (start, end)
+
+
+def ical(request, req, id):
+    plist = gen_pair_list(req, id, 1)
+    days = plist['days']
+    for week in xrange(2, 3):
+        days.extend(gen_pair_list(req, id, week)['days'])
+    res = []
+    for day in days:
+        date = day[2]
+        for pair in day[1]:
+            adate = pair_date(date, pair.pair_number.all())
+            res.append({
+                'start': adate[0],
+                'end': adate[1],
+                'pair': pair,
+            })
+    return render_to_response('ical.html', {
+        'list': res,
+    })
 
 
 def table(request):

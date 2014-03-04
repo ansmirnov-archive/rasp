@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+PRODID:-//Andrey Smirnov//rasp.rgatausers.ru//RU
+VERSION:2.0
+CALSCALE:RUSSIAN
+X-WR-CALNAME:test
+X-WR-TIMEZONE:Europe/Moscow
+X-WR-CALDESC:
+{% for pair in list %}BEGIN:VEVENT
+DTSTART:{{ pair.start.year | stringformat:"04d" }}{{ pair.start.month | stringformat:"02d" }}{{ pair.start.day | stringformat:"02d" }}T{{ pair.start.hour | stringformat:"02d" }}{{ pair.start.minute | stringformat:"02d" }}00Z
+DTEND:{{ pair.end.year | stringformat:"04d" }}{{ pair.end.month | stringformat:"02d" }}{{ pair.end.day | stringformat:"02d" }}T{{ pair.end.hour | stringformat:"02d" }}{{ pair.end.minute | stringformat:"02d" }}00Z
+DESCRIPTION:
+LOCATION:
+SEQUENCE:0
+SUMMARY:{{ pair.pair.subject }} ({{ pair.pair.aud.name }})
+END:VEVENT
+{% endfor %}END:VCALENDAR

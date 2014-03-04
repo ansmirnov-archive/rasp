@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^preps$', 'main.views.preps_list', name='preps_list'),
     url(r'^(\w+)/(\d+)$', 'main.views.pairs_list', name='pairs_list'),
     url(r'^(\w+)/(\d+)/(\d+)$', 'main.views.pairs_list', name='pairs_list'),
+    url(r'^ical/(\w+)/(\d+).ical$', 'main.views.ical', name='ical'),
     # url(r'^rasp/', include('rasp.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
